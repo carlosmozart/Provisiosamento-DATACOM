@@ -84,7 +84,7 @@ class GetValores {
             this.resultados.appendChild(resultadoServicePort1);
 
             const resultadoServicePort2 = document.createElement('li');
-            resultadoServicePort2.textContent = `service-port ${servicePort2} gpon ${ramo} onu ${nOnu} gem 2 match vlan vlan-id 99 action vlan replace vlan-id ${vlan}`;
+            resultadoServicePort2.textContent = `service-port ${servicePort2} gpon ${ramo} onu ${nOnu} gem 2 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`;
             this.resultados.appendChild(resultadoServicePort2);
 
             const resultadoLinha4 = document.createElement('li');
@@ -211,7 +211,7 @@ class GetValores {
             this.resultados.appendChild(resultadoLinhaB3);
 
             const resultadoServicePort1 = document.createElement('li');
-            resultadoServicePort1.textContent = `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id 1154 action vlan replace vlan-id ${vlan}`;
+            resultadoServicePort1.textContent = `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`;
             this.resultados.appendChild(resultadoServicePort1);
 
             const resultadoLinha4 = document.createElement('li');
