@@ -251,7 +251,7 @@ class GetValores {
             this.resultados.appendChild(resultadoSerial);
 
             const resultadoLinhaB7 = document.createElement('li');
-            resultadoLinhaB7.textContent = `sservice-profile spBRIDGE line-profile ONU_BRIDGE`;
+            resultadoLinhaB7.textContent = `service-profile spBRIDGE line-profile ONU_BRIDGE`;
             this.resultados.appendChild(resultadoLinhaB7);
 
             const resultadoLinha2 = document.createElement('li');
