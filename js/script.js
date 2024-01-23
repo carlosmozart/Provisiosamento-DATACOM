@@ -59,6 +59,10 @@ class GetValores {
             resultadoLinhaB7.textContent = `line-profile TEMP`;
             this.resultados.appendChild(resultadoLinhaB7);
 
+            const resultadoLinhaB10 = document.createElement('li');
+            resultadoLinhaB10.textContent = `tr069-acs-profile GenieACS`;
+            this.resultados.appendChild(resultadoLinhaB10);
+
             const resultadoLinha2 = document.createElement('li');
             resultadoLinha2.textContent = `snmp profile snmpOnu`;
             this.resultados.appendChild(resultadoLinha2);
@@ -124,12 +128,16 @@ class GetValores {
             this.resultados.appendChild(resultadoSerial);
 
             const resultadoLinhaB7 = document.createElement('li');
-            resultadoLinhaB7.textContent = `service-profile spBRIDGE line-profile onuBridge`;
+            resultadoLinhaB7.textContent = `service-profile spBRIDGE line-profile ONU_BRIDGE`;
             this.resultados.appendChild(resultadoLinhaB7);
 
             const resultadoLinha2 = document.createElement('li');
-            resultadoLinha2.textContent = `snmp profile snmpOnu`;
+            resultadoLinha2.textContent = `snmp profile SNMP-ONU`;
             this.resultados.appendChild(resultadoLinha2);
+
+            const resultadoLinha10 = document.createElement('li');
+            resultadoLinha10.textContent = `tr069-acs-profile GenieACS`;
+            this.resultados.appendChild(resultadoLinha10);
 
             const resultadoLinhaB6 = document.createElement('li');
             resultadoLinhaB6.textContent = `ethernet 1`;
@@ -195,11 +203,23 @@ class GetValores {
             this.resultados.appendChild(resultadoSerial);
 
             const resultadoLinhaB7 = document.createElement('li');
-            resultadoLinhaB7.textContent = `service-profile spROUTER-DM985-100 line-profile lpROUTER-DM985-100`;
+            resultadoLinhaB7.textContent = `line-profile TEMP`;
             this.resultados.appendChild(resultadoLinhaB7);
 
+            const resultadoLinhaB10 = document.createElement('li');
+            resultadoLinhaB10.textContent = `tr069-acs-profile GenieASC`;
+            this.resultados.appendChild(resultadoLinhaB10);
+
             const resultadoLinha2 = document.createElement('li');
-            resultadoLinha2.textContent = `snmp profile SNMP-ONU`;
+            resultadoLinha2.textContent = `snmp profile snmpOnu`;
+            this.resultados.appendChild(resultadoLinha2);
+
+            const resultadoLinha11 = document.createElement('li');
+            resultadoLinha11.textContent = `ipv4 vlan vlan-id 99`;
+            this.resultados.appendChild(resultadoLinha11);
+
+            const resultadoLinha12 = document.createElement('li');
+            resultadoLinha12.textContent = `ipv4 dhcp`;
             this.resultados.appendChild(resultadoLinha2);
 
             const resultadoLinhaB6 = document.createElement('li');
@@ -213,6 +233,10 @@ class GetValores {
             const resultadoServicePort1 = document.createElement('li');
             resultadoServicePort1.textContent = `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`;
             this.resultados.appendChild(resultadoServicePort1);
+
+            const resultadoServicePort12 = document.createElement('li');
+            resultadoServicePort12.textContent = `service-port ${servicePort2} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`;
+            this.resultados.appendChild(resultadoServicePort12);
 
             const resultadoLinha4 = document.createElement('li');
             resultadoLinha4.textContent = `commit`;
@@ -258,6 +282,10 @@ class GetValores {
             resultadoLinha2.textContent = `snmp profile SNMP-ONU`;
             this.resultados.appendChild(resultadoLinha2);
 
+            const resultadoLinha11 = document.createElement('li');
+            resultadoLinha11.textContent = `tr069-acs-profile GenieACS`;
+            this.resultados.appendChild(resultadoLinha11);
+
             const resultadoLinhaB6 = document.createElement('li');
             resultadoLinhaB6.textContent = `ethernet 1`;
             this.resultados.appendChild(resultadoLinhaB6);
@@ -269,6 +297,10 @@ class GetValores {
             const resultadoLinha3 = document.createElement('li');
             resultadoLinha3.textContent = `no shutdown`;
             this.resultados.appendChild(resultadoLinha3);
+
+            const resultadoLinha13 = document.createElement('li');
+            resultadoLinha13.textContent = `native vlan vlan-id ${vlan}`;
+            this.resultados.appendChild(resultadoLinha13);
 
             const resultadoLinhaB4 = document.createElement('li');
             resultadoLinhaB4.textContent = `!`;
