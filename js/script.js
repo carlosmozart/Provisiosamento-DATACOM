@@ -211,7 +211,7 @@ class GetValores {
             this.resultados.appendChild(resultadoLinhaB10);
 
             const resultadoLinha2 = document.createElement('li');
-            resultadoLinha2.textContent = `snmp profile snmpOnu`;
+            resultadoLinha2.textContent = `snmp profile SNMP-ONU`;
             this.resultados.appendChild(resultadoLinha2);
 
             const resultadoLinha11 = document.createElement('li');
