@@ -207,7 +207,7 @@ class GetValores {
             this.resultados.appendChild(resultadoLinhaB7);
 
             const resultadoLinhaB10 = document.createElement('li');
-            resultadoLinhaB10.textContent = `tr069-acs-profile GenieASC`;
+            resultadoLinhaB10.textContent = `tr069-acs-profile GenieACS`;
             this.resultados.appendChild(resultadoLinhaB10);
 
             const resultadoLinha2 = document.createElement('li');
@@ -235,7 +235,7 @@ class GetValores {
             this.resultados.appendChild(resultadoServicePort1);
 
             const resultadoServicePort12 = document.createElement('li');
-            resultadoServicePort12.textContent = `service-port ${servicePort2} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`;
+            resultadoServicePort12.textContent = `service-port ${servicePort2} gpon ${ramo} onu ${nOnu} gem 2 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`;
             this.resultados.appendChild(resultadoServicePort12);
 
             const resultadoLinha4 = document.createElement('li');
