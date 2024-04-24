@@ -1,4 +1,3 @@
-
 class GetValores {
     constructor() {
         this.formulario = document.getElementById('ordemServico');
@@ -33,358 +32,67 @@ class GetValores {
         document.getElementById('servicePort2').value = '';
         document.getElementById('vlan').value = '';
 
+        const commonLines = [
+            `config`,
+            `interface gpon ${ramo}`,
+            `onu ${nOnu}`,
+            `name ${nome}`,
+            `serial-number ${serial}`
+        ];
 
-        if (base == 'WLAN' && olt == 'DATACOM' && lineProfile == 'ROUTER') {
-            const resultadoLinhaB2 = document.createElement('li');
-            resultadoLinhaB2.textContent = `config`;
-            this.resultados.appendChild(resultadoLinhaB2);
-
-            const resultadoRamo = document.createElement('li');
-            resultadoRamo.textContent = `interface gpon ${ramo}`;
-            this.resultados.appendChild(resultadoRamo);
-
-            const resultadonOnu = document.createElement('li');
-            resultadonOnu.textContent = `onu ${nOnu}`;
-            this.resultados.appendChild(resultadonOnu);
-
-            const resultadoNome = document.createElement('li');
-            resultadoNome.textContent = `name ${nome}`;
-            this.resultados.appendChild(resultadoNome);
-
-            const resultadoSerial = document.createElement('li');
-            resultadoSerial.textContent = `serial-number ${serial}`;
-            this.resultados.appendChild(resultadoSerial);
-
-            const resultadoLinhaB7 = document.createElement('li');
-            resultadoLinhaB7.textContent = `line-profile TEMP`;
-            this.resultados.appendChild(resultadoLinhaB7);
-
-            const resultadoLinhaB10 = document.createElement('li');
-            resultadoLinhaB10.textContent = `tr069-acs-profile GenieACS`;
-            this.resultados.appendChild(resultadoLinhaB10);
-
-            const resultadoLinha2 = document.createElement('li');
-            resultadoLinha2.textContent = `snmp profile snmpOnu`;
-            this.resultados.appendChild(resultadoLinha2);
-
-            const resultadoLinhaB6 = document.createElement('li');
-            resultadoLinhaB6.textContent = `ipv4 vlan vlan-id 99`;
-            this.resultados.appendChild(resultadoLinhaB6);
-
-            const resultadoLinhaB3 = document.createElement('li');
-            resultadoLinhaB3.textContent = `ipv4 dhcp`;
-            this.resultados.appendChild(resultadoLinhaB3);
-
-            const resultadoLinha3 = document.createElement('li');
-            resultadoLinha3.textContent = `veip 1`;
-            this.resultados.appendChild(resultadoLinha3);
-
-            const resultadoLinhaB4 = document.createElement('li');
-            resultadoLinhaB4.textContent = `top`;
-            this.resultados.appendChild(resultadoLinhaB4);
-
-            const resultadoServicePort1 = document.createElement('li');
-            resultadoServicePort1.textContent = `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id 99 action vlan replace vlan-id 99`;
-            this.resultados.appendChild(resultadoServicePort1);
-
-            const resultadoServicePort2 = document.createElement('li');
-            resultadoServicePort2.textContent = `service-port ${servicePort2} gpon ${ramo} onu ${nOnu} gem 2 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`;
-            this.resultados.appendChild(resultadoServicePort2);
-
-            const resultadoLinha4 = document.createElement('li');
-            resultadoLinha4.textContent = `commit`;
-            this.resultados.appendChild(resultadoLinha4);
-
-            const resultadoLinhaB5 = document.createElement('li');
-            resultadoLinhaB5.textContent = `end`;
-            this.resultados.appendChild(resultadoLinhaB5);
-
-            const resultadoLinha5 = document.createElement('li');
-            resultadoLinha5.textContent = `exit`;
-            this.resultados.appendChild(resultadoLinha5);
+        if (base === 'WLAN' && olt === 'DATACOM') {
+            if (lineProfile === 'ROUTER') {
+                const lines = [
+                    ...commonLines,
+                    `line-profile ONT-MGMT`,
+                    `  tr069-acs-profile GenieACS`,
+                    `snmp profile SNMP-ONU`,
+                    `ipv4 vlan vlan-id 110`,
+                    `ipv4 dhcp`,
+                    `veip 1`,
+                    `!`,
+                    `!`,
+                    `!`,
+                    `top`,
+                    `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id 110 action vlan replace vlan-id 110`,
+                    `service-port ${servicePort2} gpon ${ramo} onu ${nOnu} gem 2 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`,
+                    `commit`,
+                    `end`,
+                    `exit`
+                ];
+                this.addLinesToResults(lines);
+            } else if (lineProfile === 'BRIDGE') {
+                const lines = [
+                    ...commonLines,
+                    `service-profile spBRIDGE line-profile ONU_BRIDGE`,
+                    `snmp profile SNMP-ONU`,
+                    `tr069-acs-profile GenieACS`,
+                    `ethernet 1`,
+                    `negotiation`,
+                    `no shutdown`,
+                    `!`,
+                    `!`,
+                    `!`,
+                    `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id any action vlan add vlan-id ${vlan}`,
+                    `commit`,
+                    `end`,
+                    `exit`
+                ];
+                this.addLinesToResults(lines);
+            }
 
         }
-
-        if (base == 'WLAN' && olt == 'DATACOM' && lineProfile == 'BRIDGE') {
-
-            const resultadoLinhaB2 = document.createElement('li');
-            resultadoLinhaB2.textContent = `config`;
-            this.resultados.appendChild(resultadoLinhaB2);
-
-            const resultadoRamo = document.createElement('li');
-            resultadoRamo.textContent = `interface gpon ${ramo}`;
-            this.resultados.appendChild(resultadoRamo);
-
-            const resultadonOnu = document.createElement('li');
-            resultadonOnu.textContent = `onu ${nOnu}`;
-            this.resultados.appendChild(resultadonOnu);
-
-            const resultadoNome = document.createElement('li');
-            resultadoNome.textContent = `name ${nome}`;
-            this.resultados.appendChild(resultadoNome);
-
-            const resultadoSerial = document.createElement('li');
-            resultadoSerial.textContent = `serial-number ${serial}`;
-            this.resultados.appendChild(resultadoSerial);
-
-            const resultadoLinhaB7 = document.createElement('li');
-            resultadoLinhaB7.textContent = `service-profile spBRIDGE line-profile ONU_BRIDGE`;
-            this.resultados.appendChild(resultadoLinhaB7);
-
-            const resultadoLinha2 = document.createElement('li');
-            resultadoLinha2.textContent = `snmp profile SNMP-ONU`;
-            this.resultados.appendChild(resultadoLinha2);
-
-            const resultadoLinha10 = document.createElement('li');
-            resultadoLinha10.textContent = `tr069-acs-profile GenieACS`;
-            this.resultados.appendChild(resultadoLinha10);
-
-            const resultadoLinhaB6 = document.createElement('li');
-            resultadoLinhaB6.textContent = `ethernet 1`;
-            this.resultados.appendChild(resultadoLinhaB6);
-
-            const resultadoLinhaB3 = document.createElement('li');
-            resultadoLinhaB3.textContent = `negotiation`;
-            this.resultados.appendChild(resultadoLinhaB3);
-
-            const resultadoLinha3 = document.createElement('li');
-            resultadoLinha3.textContent = `no shutdown`;
-            this.resultados.appendChild(resultadoLinha3);
-
-            const resultadoLinhaB4 = document.createElement('li');
-            resultadoLinhaB4.textContent = `!`;
-            this.resultados.appendChild(resultadoLinhaB4);
-
-            const resultadoLinhaB8 = document.createElement('li');
-            resultadoLinhaB8.textContent = `!`;
-            this.resultados.appendChild(resultadoLinhaB8);
-
-            const resultadoLinhaB9 = document.createElement('li');
-            resultadoLinhaB9.textContent = `!`;
-            this.resultados.appendChild(resultadoLinhaB9);
-
-            const resultadoServicePort1 = document.createElement('li');
-            resultadoServicePort1.textContent = `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id any action vlan add vlan-id ${vlan}`;
-            this.resultados.appendChild(resultadoServicePort1);
-
-            const resultadoLinha4 = document.createElement('li');
-            resultadoLinha4.textContent = `commit`;
-            this.resultados.appendChild(resultadoLinha4);
-
-            const resultadoLinhaB5 = document.createElement('li');
-            resultadoLinhaB5.textContent = `end`;
-            this.resultados.appendChild(resultadoLinhaB5);
-
-            const resultadoLinha5 = document.createElement('li');
-            resultadoLinha5.textContent = `exit`;
-            this.resultados.appendChild(resultadoLinha5);
-
-        }
-
-        if (base == 'AMPLITUDE' && olt == 'DATACOM' && lineProfile == 'ROUTER') {
-            const resultadoLinhaB2 = document.createElement('li');
-            resultadoLinhaB2.textContent = `config`;
-            this.resultados.appendChild(resultadoLinhaB2);
-
-            const resultadoRamo = document.createElement('li');
-            resultadoRamo.textContent = `interface gpon ${ramo}`;
-            this.resultados.appendChild(resultadoRamo);
-
-            const resultadonOnu = document.createElement('li');
-            resultadonOnu.textContent = `onu ${nOnu}`;
-            this.resultados.appendChild(resultadonOnu);
-
-            const resultadoNome = document.createElement('li');
-            resultadoNome.textContent = `name ${nome}`;
-            this.resultados.appendChild(resultadoNome);
-
-            const resultadoSerial = document.createElement('li');
-            resultadoSerial.textContent = `serial-number ${serial}`;
-            this.resultados.appendChild(resultadoSerial);
-
-            const resultadoLinhaB7 = document.createElement('li');
-            resultadoLinhaB7.textContent = `line-profile TEMP`;
-            this.resultados.appendChild(resultadoLinhaB7);
-
-            const resultadoLinhaB10 = document.createElement('li');
-            resultadoLinhaB10.textContent = `tr069-acs-profile GenieACS`;
-            this.resultados.appendChild(resultadoLinhaB10);
-
-            const resultadoLinha2 = document.createElement('li');
-            resultadoLinha2.textContent = `snmp profile SNMP-ONU`;
-            this.resultados.appendChild(resultadoLinha2);
-
-            const resultadoLinha11 = document.createElement('li');
-            resultadoLinha11.textContent = `ipv4 vlan vlan-id 99`;
-            this.resultados.appendChild(resultadoLinha11);
-
-            const resultadoLinha12 = document.createElement('li');
-            resultadoLinha12.textContent = `ipv4 dhcp`;
-            this.resultados.appendChild(resultadoLinha2);
-
-            const resultadoLinhaB6 = document.createElement('li');
-            resultadoLinhaB6.textContent = `veip 1`;
-            this.resultados.appendChild(resultadoLinhaB6);
-
-            const resultadoLinhaB3 = document.createElement('li');
-            resultadoLinhaB3.textContent = `!`;
-            this.resultados.appendChild(resultadoLinhaB3);
-
-            const resultadoServicePort1 = document.createElement('li');
-            resultadoServicePort1.textContent = `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`;
-            this.resultados.appendChild(resultadoServicePort1);
-
-            const resultadoServicePort12 = document.createElement('li');
-            resultadoServicePort12.textContent = `service-port ${servicePort2} gpon ${ramo} onu ${nOnu} gem 2 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`;
-            this.resultados.appendChild(resultadoServicePort12);
-
-            const resultadoLinha4 = document.createElement('li');
-            resultadoLinha4.textContent = `commit`;
-            this.resultados.appendChild(resultadoLinha4);
-
-            const resultadoLinhaB5 = document.createElement('li');
-            resultadoLinhaB5.textContent = `end`;
-            this.resultados.appendChild(resultadoLinhaB5);
-
-            const resultadoLinha5 = document.createElement('li');
-            resultadoLinha5.textContent = `exit`;
-            this.resultados.appendChild(resultadoLinha5);
-
-        }
-
-        if (base == 'AMPLITUDE' && olt == 'DATACOM' && lineProfile == 'BRIDGE') {
-
-            const resultadoLinhaB2 = document.createElement('li');
-            resultadoLinhaB2.textContent = `config`;
-            this.resultados.appendChild(resultadoLinhaB2);
-
-            const resultadoRamo = document.createElement('li');
-            resultadoRamo.textContent = `interface gpon ${ramo}`;
-            this.resultados.appendChild(resultadoRamo);
-
-            const resultadonOnu = document.createElement('li');
-            resultadonOnu.textContent = `onu ${nOnu}`;
-            this.resultados.appendChild(resultadonOnu);
-
-            const resultadoNome = document.createElement('li');
-            resultadoNome.textContent = `name ${nome}`;
-            this.resultados.appendChild(resultadoNome);
-
-            const resultadoSerial = document.createElement('li');
-            resultadoSerial.textContent = `serial-number ${serial}`;
-            this.resultados.appendChild(resultadoSerial);
-
-            const resultadoLinhaB7 = document.createElement('li');
-            resultadoLinhaB7.textContent = `service-profile spBRIDGE line-profile ONU_BRIDGE`;
-            this.resultados.appendChild(resultadoLinhaB7);
-
-            const resultadoLinha2 = document.createElement('li');
-            resultadoLinha2.textContent = `snmp profile SNMP-ONU`;
-            this.resultados.appendChild(resultadoLinha2);
-
-            const resultadoLinha11 = document.createElement('li');
-            resultadoLinha11.textContent = `tr069-acs-profile GenieACS`;
-            this.resultados.appendChild(resultadoLinha11);
-
-            const resultadoLinhaB6 = document.createElement('li');
-            resultadoLinhaB6.textContent = `ethernet 1`;
-            this.resultados.appendChild(resultadoLinhaB6);
-
-            const resultadoLinhaB3 = document.createElement('li');
-            resultadoLinhaB3.textContent = `negotiation`;
-            this.resultados.appendChild(resultadoLinhaB3);
-
-            const resultadoLinha3 = document.createElement('li');
-            resultadoLinha3.textContent = `no shutdown`;
-            this.resultados.appendChild(resultadoLinha3);
-
-            const resultadoLinha13 = document.createElement('li');
-            resultadoLinha13.textContent = `native vlan vlan-id ${vlan}`;
-            this.resultados.appendChild(resultadoLinha13);
-
-            const resultadoLinhaB4 = document.createElement('li');
-            resultadoLinhaB4.textContent = `!`;
-            this.resultados.appendChild(resultadoLinhaB4);
-
-            const resultadoLinhaB8 = document.createElement('li');
-            resultadoLinhaB8.textContent = `!`;
-            this.resultados.appendChild(resultadoLinhaB8);
-
-            const resultadoLinhaB9 = document.createElement('li');
-            resultadoLinhaB9.textContent = `!`;
-            this.resultados.appendChild(resultadoLinhaB9);
-
-            const resultadoServicePort1 = document.createElement('li');
-            resultadoServicePort1.textContent = `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id any action vlan add vlan-id ${vlan}`;
-            this.resultados.appendChild(resultadoServicePort1);
-
-            const resultadoLinha4 = document.createElement('li');
-            resultadoLinha4.textContent = `commit`;
-            this.resultados.appendChild(resultadoLinha4);
-
-            const resultadoLinhaB5 = document.createElement('li');
-            resultadoLinhaB5.textContent = `end`;
-            this.resultados.appendChild(resultadoLinhaB5);
-
-            const resultadoLinha5 = document.createElement('li');
-            resultadoLinha5.textContent = `exit`;
-            this.resultados.appendChild(resultadoLinha5);
-
-        }
-
-        if (base == 'AMPLITUDE' && olt == 'HUAWEI' && lineProfile == 'ROUTER') {
-            const resultadoLinhaB2 = document.createElement('li');
-            resultadoLinhaB2.textContent = `config`;
-            this.resultados.appendChild(resultadoLinhaB2);
-
-            const resultadoRamo = document.createElement('li');
-            resultadoRamo.textContent = `interface gpon ${ramo}`;
-            this.resultados.appendChild(resultadoRamo);
-
-            const resultadonOnu = document.createElement('li');
-            resultadonOnu.textContent = `onu ${nOnu}`;
-            this.resultados.appendChild(resultadonOnu);
-
-            const resultadoNome = document.createElement('li');
-            resultadoNome.textContent = `name ${nome}`;
-            this.resultados.appendChild(resultadoNome);
-
-            const resultadoSerial = document.createElement('li');
-            resultadoSerial.textContent = `serial-number ${serial}`;
-            this.resultados.appendChild(resultadoSerial);
-
-            const resultadoLinhaB7 = document.createElement('li');
-            resultadoLinhaB7.textContent = `line-profile HUAWEI service-profile ONU-HUAWEI`;
-            this.resultados.appendChild(resultadoLinhaB7);
-
-            const resultadoLinha2 = document.createElement('li');
-            resultadoLinha2.textContent = `snmp profile SNMP-ONU`;
-            this.resultados.appendChild(resultadoLinha2);
-
-            const resultadoServicePort1 = document.createElement('li');
-            resultadoServicePort1.textContent = `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`;
-            this.resultados.appendChild(resultadoServicePort1);
-
-            const resultadoLinha4 = document.createElement('li');
-            resultadoLinha4.textContent = `commit`;
-            this.resultados.appendChild(resultadoLinha4);
-
-            const resultadoLinhaB5 = document.createElement('li');
-            resultadoLinhaB5.textContent = `end`;
-            this.resultados.appendChild(resultadoLinhaB5);
-
-            const resultadoLinha5 = document.createElement('li');
-            resultadoLinha5.textContent = `exit`;
-            this.resultados.appendChild(resultadoLinha5);
-
-        }
-
-
     }
 
+    addLinesToResults(lines) {
+        lines.forEach(line => {
+            const listItem = document.createElement('li');
+            listItem.textContent = line;
+            this.resultados.appendChild(listItem);
+        });
+    }
 
     copiarParaAreaDeTransferencia() {
-
         const listaTexto = Array.from(this.minhaLista.querySelectorAll("li"))
             .map(item => item.textContent)
             .join("\n");
@@ -397,11 +105,8 @@ class GetValores {
         document.body.removeChild(textarea);
         alert("Lista copiada para a área de transferência!");
     }
-
-
 }
 
 window.addEventListener('load', () => {
     const minhaInstancia = new GetValores();
 });
-
