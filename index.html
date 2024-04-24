@@ -19,14 +19,11 @@
 
                 <label for="titulo" class="label">Base:</label>
                 <select id=base class="box">
-                    <option value=""></option>
-                    <option value="AMPLITUDE">AMPLITUDE</option>
                     <option value="WLAN">WLAN</option>
                 </select>
                 <br>
                 <label for="olt" class="label">OLT:</label>
                 <select id=olt class="box">
-                    <option value=""></option>
                     <option value="DATACOM">DATACOM</option>
                 </select>
                 <br>
@@ -66,19 +63,9 @@
                 <input type="text" class="box" id="vlan" name="vlan" placeholder="0000" maxlength="4" required> <br>
 
             </div>
-            <div class="section section2">
 
-                <div class="container">
-                    <div class="center">
-                        <button type="submit" class="button" id="btn-enviar">
-                            <svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
-                                <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line" />
-                                <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line" />
-                            </svg>
-                            <span><b>Enviar</b></span>
-                        </button>
-                    </div>
-                </div>
+            <div class="section section3">
+
 
                 <div class="section section3">
 
@@ -86,24 +73,29 @@
 
                     <span>=================================</span>
                     <ul id="resultados"></ul>
+
                     <span>=================================</span>
 
-                    <div class="container2">
-                        <div class="center">
-                            <button type="submit" class="button" id="btn-copiar">
-                                <svg width="180px" height="60px" viewBox="0 0 180 60" class="border">
-                                    <polyline points="179,1 179,59 1,59 1,1 179,1" class="bg-line" />
-                                    <polyline points="179,1 179,59 1,59 1,1 179,1" class="hl-line" />
-                                </svg>
-                                <span><b>Copiar os Dados</b></span>
-                            </button>
-                        </div>
 
-                    </div>
+
                 </div>
+                <br>
+
                 <span><b>Desenvolvido por Carlos Mozart</b></span>
+                <br>
+
+                <button type="submit" class="button" id="btn-enviar">
+                    <span><b>Enviar</b></span>
+                </button>
+
+                <button type="submit" class="button" id="btn-copiar">
+                    <span><b>Copiar os Dados</b></span>
+                </button>
+            </div>
+        </div>
+
     </form>
-    </div>
+
 
     <script src="./js/script.js"></script>
 </body>
