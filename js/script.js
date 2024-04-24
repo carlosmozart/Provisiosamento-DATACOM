@@ -2,77 +2,101 @@ class GetValores {
     constructor() {
         this.formulario = document.getElementById('ordemServico');
         this.resultados = document.getElementById('resultados');
+        this.formulario.addEventListener('submit', this.enviarTextos.bind(this));
         this.botaoCopiar = document.getElementById("btn-copiar");
         this.minhaLista = document.getElementById("resultados");
-        this.mensagem = document.getElementById('mensagem');
-        this.mensagem2 = document.getElementById('mensagem2');
-
-        this.setupCheckboxEventListeners('anexo', this.mensagem, 'Então anexe o print!');
-        this.setupCheckboxEventListeners('controladora', this.mensagem2, 'Então ajuste a controladora!');
-
-        this.formulario.addEventListener('submit', this.enviarTextos.bind(this));
         this.botaoCopiar.addEventListener("click", () => this.copiarParaAreaDeTransferencia());
-    }
-
-    setupCheckboxEventListeners(name, mensagemElement, mensagemText) {
-        const checkboxes = document.querySelectorAll(`input[name="${name}"]`);
-        checkboxes.forEach(checkbox => {
-            checkbox.addEventListener('change', () => {
-                checkboxes.forEach(otherCheckbox => {
-                    if (otherCheckbox !== checkbox) {
-                        otherCheckbox.checked = false;
-                    }
-                });
-
-                mensagemElement.textContent = (checkbox.value === 'nao' && checkbox.checked) ? mensagemText : '';
-                mensagemElement.style.display = (mensagemElement.textContent !== '') ? 'block' : 'none';
-            });
-        });
     }
 
     enviarTextos(event) {
         event.preventDefault();
-        const formData = this.getFormData();
+
+        const base = document.getElementById('base').value;
+        const olt = document.getElementById('olt').value;
+        const lineProfile = document.getElementById('lineProfile').value;
+        const nOnu = document.getElementById('nOnu').value;
+        const nome = document.getElementById('nome').value;
+        const serial = document.getElementById('serial').value;
+        const servicePort1 = document.getElementById('servicePort1').value;
+        const servicePort2 = document.getElementById('servicePort2').value;
+        const ramo = document.getElementById('ramo').value;
+        const vlan = document.getElementById('vlan').value;
 
         this.resultados.innerHTML = '';
-        this.clearFormFields();
 
-        this.renderFormData(formData);
-    }
+        document.getElementById('nOnu').value = '';
+        document.getElementById('nome').value = '';
+        document.getElementById('ramo').value = '';
+        document.getElementById('serial').value = '';
+        document.getElementById('servicePort1').value = '';
+        document.getElementById('servicePort2').value = '';
+        document.getElementById('vlan').value = '';
 
-    getFormData() {
-        const formData = {};
-        const formElements = this.formulario.elements;
-        for (const element of formElements) {
-            if (element.id) {
-                formData[element.id] = element.value.replace(/\n/g, '<br>');
+        const commonLines = [
+            `config`,
+            `interface gpon ${ramo}`,
+            `onu ${nOnu}`,
+            `name ${nome}`,
+            `serial-number ${serial}`
+        ];
+
+        if (base === 'WLAN' && olt === 'DATACOM') {
+            if (lineProfile === 'ROUTER') {
+                const lines = [
+                    ...commonLines,
+                    `line-profile ONT-MGMT`,
+                    `  tr069-acs-profile GenieACS`,
+                    `snmp profile SNMP-ONU`,
+                    `ipv4 vlan vlan-id 110`,
+                    `ipv4 dhcp`,
+                    `veip 1`,
+                    `!`,
+                    `!`,
+                    `!`,
+                    `top`,
+                    `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id 110 action vlan replace vlan-id 110`,
+                    `service-port ${servicePort2} gpon ${ramo} onu ${nOnu} gem 2 match vlan vlan-id ${vlan} action vlan replace vlan-id ${vlan}`,
+                    `commit`,
+                    `end`,
+                    `exit`
+                ];
+                this.addLinesToResults(lines);
+            } else if (lineProfile === 'BRIDGE') {
+                const lines = [
+                    ...commonLines,
+                    `service-profile spBRIDGE line-profile ONU_BRIDGE`,
+                    `snmp profile SNMP-ONU`,
+                    `tr069-acs-profile GenieACS`,
+                    `ethernet 1`,
+                    `negotiation`,
+                    `no shutdown`,
+                    `!`,
+                    `!`,
+                    `!`,
+                    `service-port ${servicePort1} gpon ${ramo} onu ${nOnu} gem 1 match vlan vlan-id any action vlan add vlan-id ${vlan}`,
+                    `commit`,
+                    `end`,
+                    `exit`
+                ];
+                this.addLinesToResults(lines);
             }
-        }
-        return formData;
-    }
 
-    clearFormFields() {
-        const formElements = this.formulario.elements;
-        for (const element of formElements) {
-            if (element.id) {
-                element.value = '';
-            }
         }
     }
 
-    renderFormData(formData) {
-        for (const [key, value] of Object.entries(formData)) {
-            if (key !== 'btn-enviar' && key !== 'btn-copiar') {
-                const resultadoItem = document.createElement('li');
-                resultadoItem.textContent = `${key}: ${value}`;
-                this.resultados.appendChild(resultadoItem);
-            }
-        }
+    addLinesToResults(lines) {
+        lines.forEach(line => {
+            const listItem = document.createElement('li');
+            listItem.textContent = line;
+            this.resultados.appendChild(listItem);
+        });
     }
-    
 
     copiarParaAreaDeTransferencia() {
-        const listaTexto = Array.from(this.minhaLista.querySelectorAll("li")).map(item => item.textContent).join("\n");
+        const listaTexto = Array.from(this.minhaLista.querySelectorAll("li"))
+            .map(item => item.textContent)
+            .join("\n");
+
         const textarea = document.createElement("textarea");
         textarea.value = listaTexto;
         document.body.appendChild(textarea);
