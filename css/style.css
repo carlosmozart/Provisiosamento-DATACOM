@@ -1,134 +1,254 @@
-@import url('https://fonts.googleapis.com/css2?family=Oxanium:wght@300;400;500;600;700;800&display=swap');
-
+/* Reset e estilo padrão */
 * {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  font-family: Arial, sans-serif;
 }
 
 body {
-  text-align: center;
-  background: linear-gradient(to bottom, #ffa500, #fff);
-  min-height: 110vh;
-  font-family: 'Oxanium', cursive;
-}
-
-.box,
-.boxp,
-.geo,
-input[type="text"],
-textarea {
-  width: 300px;
-  height: 30px;
-  border-radius: 10px;
-  border: 1px solid #000000;
-  -moz-border-radius: 4px;
-  -webkit-border-radius: 4px;
-  box-shadow: 1px 1px 2px #333333;
-  -moz-box-shadow: 1px 1px 2px #333333;
-  -webkit-box-shadow: 1px 1px 2px #333333;
-  background: #cccccc;
-  margin: auto;
-}
-
-input[type="text"]:hover,
-textarea:hover {
-  background: #ffffff;
-  border: 1px solid #990000;
-}
-
-input[type="submit"] {
-  background: #006699;
-  color: #ffffff;
-}
-
-textarea {
-  width: 150px;
-  height: 100px;
-}
-
-.container {
-  height: 100px;
-  position: relative;
-  top: 97%;
-  transform: translateX(-50%);
+  background: linear-gradient(135deg, #fbe9e7, #ffcc80);
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  justify-content: flex-start;
   align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  transition: background 0.3s ease; /* Transição para a mudança do fundo */
 }
-
 
 .container {
-  width: calc(50% - 10px);
-}
-
-.container2 {
-  width: calc(50% - 10px); 
-}
-
-@media screen and (max-width: 768px) {
-  .container{
-    width: 100%; 
-  }
-}
-
-
-
-
-
-.button {
-  width: 180px;
-  height: 60px;
-  cursor: pointer;
-  background: transparent;
-  border: 1px solid #ffa500;
-  outline: none;
-  transition: 1s ease-in-out;
-  border-radius: 10px;
-  
-}
-
-.button:hover {
-  background: #ffa500;
-}
-
-.button span {
-  color: black;
-  font-weight: bold;
-  font-size: 18px;
-  font-weight: 100;
-}
-
-label {
-  display: inline-block;
-  width: 240px;
-  text-align: start;
-  padding-right: 10px;
-  padding-bottom: 20px;
-}
-
-.dashboard {
-  display: flex;
-  justify-content: space-between;
+  width: 100%;
+  max-width: 1080px;
   padding: 20px;
+  margin: auto;
+  background-color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   border-radius: 10px;
+  display: flex;
+  flex-wrap: wrap; /* Permite que as seções se ajustem em linha */
+  gap: 20px; /* Adiciona um espaçamento entre as seções */
+}
+
+img {
+  display: block;
+  margin: 0 auto 20px;
+  max-width: 120px;
+}
+
+form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 15px; /* Reduzi o espaçamento entre os campos */
 }
 
 .section {
-  flex: 1;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+  background-color: #ffffff;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  flex: 1 1 45%; /* Tenta ajustar as seções para 45% da largura cada */
+}
+
+.section1, .section2 {
+  display: flex;
+  flex-direction: column;
+  gap: 8px; /* Menor espaçamento entre os itens dentro das seções */
+}
+
+label {
+  font-weight: bold;
+  color: #f57c00;
+  margin-bottom: 5px;
+}
+
+.box, .boxp, .descricao, .geo {
+  width: 100%;
+  padding: 8px; /* Diminui o padding para melhor alinhamento */
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.box:focus, .boxp:focus, .descricao:focus, .geo:focus {
+  border-color: #f57c00;
+  box-shadow: 0 0 5px rgba(245, 124, 0, 0.4);
+}
+
+.button {
+  background-color: #f57c00;
+  color: #ffffff;
+  border: none;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 5px;
+}
+
+.button:hover {
+  background-color: #fb8c00;
+}
+
+#addTelefone, #addEquipamento, .remover {
+  padding: 4px;
+  font-size: 1rem;
+  min-width: 30px;
+  text-align: center;
+  background-color: #f57c00;
+  color: #ffffff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#addTelefone:hover, #addEquipamento:hover, .remover:hover {
+  background-color: #fb8c00;
+}
+
+.remover {
+  background-color: #f44336;
+}
+
+.remover:hover {
+  background-color: #e53935;
+}
+
+.result-section {
   text-align: center;
 }
 
-svg {
-  position: absolute;
-  left: 0;
-  top: 0;
-  fill: none;
-  stroke: #fff;
-  stroke-dasharray: 150 480;
-  stroke-dashoffset: 150;
-  transition: 1s ease-in-out;
+.result-section p {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 10px;
 }
+
+#resultados {
+  list-style-type: none;
+  padding: 10px;
+  background-color: #ffeb3b;
+  border-radius: 8px;
+  color: #333;
+  border: 1px solid #ddd;
+}
+
+#resultados p {
+  margin-bottom: 15px;
+  font-size: 16px;
+  font-family: Arial, sans-serif;
+}
+
+span {
+  display: block;
+  text-align: center;
+  font-size: 0.9rem;
+  margin-top: 10px;
+  color: #777;
+}
+
+/* Modo escuro */
+body.dark-mode {
+  background: linear-gradient(135deg, #2e2e2e, #4f4f4f); /* Modificando o gradiente para o modo escuro */
+  color: #ffffff;
+}
+
+.container.dark-mode {
+  background-color: #1e1e1e;
+}
+
+body.dark-mode .section, 
+body.dark-mode .section.section1, 
+body.dark-mode .section.section2, 
+body.dark-mode .section.section3 {
+  background-color: #2c2c2c;
+  color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+}
+
+body.dark-mode .box, 
+body.dark-mode .boxp, 
+body.dark-mode .descricao, 
+body.dark-mode .geo {
+  background-color: #333333;
+  color: #ffffff;
+  border: 1px solid #555555;
+}
+
+body.dark-mode .boxp::placeholder {
+  color: #aaaaaa;
+}
+
+/* Estilo para todos os botões no modo escuro */
+body.dark-mode .button, 
+body.dark-mode #addTelefone, 
+body.dark-mode #addEquipamento, 
+body.dark-mode .remover,
+body.dark-mode #btn-enviar, 
+body.dark-mode #btn-copiar,
+body.dark-mode #toggleDarkMode {
+  background-color: #444444;
+  color: #ffffff;
+  border: 1px solid #555555;
+}
+
+body.dark-mode .button:hover,
+body.dark-mode #addTelefone:hover,
+body.dark-mode #addEquipamento:hover,
+body.dark-mode .remover:hover,
+body.dark-mode #btn-enviar:hover,
+body.dark-mode #btn-copiar:hover,
+body.dark-mode #toggleDarkMode:hover {
+  background-color: #555555; /* Alteração para fundo mais escuro */
+}
+
+/* Ajuste no botão de modo escuro */
+#toggleDarkMode {
+  background-color: #f57c00;
+  color: #ffffff;
+  border: none;
+  padding: 6px 12px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: auto; /* Garantir que o botão não ocupe toda a largura */
+  flex-shrink: 0; /* Evitar que o botão encolha */
+}
+
+#toggleDarkMode:hover {
+  background-color: #fb8c00;
+}
+
+#btn-enviar:hover, #btn-copiar:hover {
+  background-color: #fb8c00;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    flex-direction: column;
+  }
+
+  .section {
+    flex: 1 1 100%;
+  }
+}
+
+/* Estilo para os botões "Enviar" e "Copiar Dados" */
+#btn-enviar, #btn-copiar {
+  background-color: #f57c00;
+  color: #ffffff; /* Cor da fonte ajustada para branca */
+  border: none;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 5px;
+}
+
