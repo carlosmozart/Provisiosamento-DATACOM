@@ -5,16 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
-
     <title>Provisionamento das ONUs DATACOM TR-69</title>
 </head>
 
 <body>
     <img src="images/logo.png">
-
+    <button id="toggleDarkMode" class="button">Modo Escuro</button>
     <form id="ordemServico">
 
-        <div class="dashboard">
+        <div class="container">
+
             <div class="section section1">
 
                 <label for="titulo" class="label">Base:</label>
@@ -61,42 +61,28 @@
 
                 <label for="vlan" id="lvlan">VLAN ID:</label>
                 <input type="text" class="box" id="vlan" name="vlan" placeholder="0000" maxlength="4" required> <br>
-
             </div>
 
             <div class="section section3">
-
-
-                <div class="section section3">
-
-                    <p>Resultados:</p>
-
-                    <span>=================================</span>
-                    <ul id="resultados"></ul>
-
-                    <span>=================================</span>
-
-
-
-                </div>
-                <br>
-
-                <span><b>Desenvolvido por Carlos Mozart</b></span>
+                <p><label>Resultados:</label></p>
+                <span>=================================</span>
+                <ul id="resultados"></ul>
+                <span>=================================</span>
                 <br>
 
                 <button type="submit" class="button" id="btn-enviar">
-                    <span><b>Enviar</b></span>
+                    <b>Enviar</b>
                 </button>
-
-                <button type="submit" class="button" id="btn-copiar">
-                    <span><b>Copiar os Dados</b></span>
+                <button type="submit" class="button" id="btn-copiar"><b>Copiar os Dados</b>
                 </button>
             </div>
+
+            <br>
+
         </div>
 
     </form>
-
-
+    <span><b>Desenvolvido por Carlos Mozart</b></span>
     <script src="./js/script.js"></script>
 </body>
 
